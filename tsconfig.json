@@ -14,9 +14,11 @@
     "isolatedModules": true,
     // Import non-ES modules as default imports.
     "esModuleInterop": true,
-    "jsx": "react"
+    // jsx handler
+    "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src/**/*",
+    "typings/**/*"
   ]
 }
