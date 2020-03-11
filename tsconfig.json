@@ -15,7 +15,8 @@
     // Import non-ES modules as default imports.
     "esModuleInterop": true,
     // jsx handler
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*",

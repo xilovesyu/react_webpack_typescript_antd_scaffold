@@ -1,13 +1,21 @@
 import * as React from 'react'
-import { Layout } from 'antd'
+import { Button, Layout } from 'antd'
+import { inject, observer } from 'mobx-react'
 
 const { Header: AntdHeader } = Layout
 
+@inject('languageStore')
+@observer
 export class Header extends React.Component<any, any> {
     render(): any {
         return (
             <AntdHeader>
-                Header
+                <Button onClick={() => {
+                    this.props.languageStore.toCN()
+                }}>中文</Button>
+                <Button onClick={() => {
+                    this.props.languageStore.toFr()
+                }}>french</Button>
             </AntdHeader>
         )
     }

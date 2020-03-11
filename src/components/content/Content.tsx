@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button } from 'antd'
+import { Button, Table } from 'antd'
 
 export class Content extends React.Component<any, any> {
     render(): any {
@@ -7,6 +7,9 @@ export class Content extends React.Component<any, any> {
             <div>
                 something
                 <Button type='primary'>Click me</Button>
+                <Table
+                    dataSource={[]}
+                />
             </div>
         )
     }
