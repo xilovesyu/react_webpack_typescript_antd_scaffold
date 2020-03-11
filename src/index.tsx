@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom'
 import { Header } from './components/header/Header'
 import { Layout } from 'antd'
 import { Footer } from './components/footer/Footer'
+import { Content } from './components/content/Content'
 
 /**
  * For accept hot update without reload page.
@@ -17,6 +18,7 @@ const App = () => {
         <div>
             <Layout>
                 <Header/>
+                <Content/>
                 <Footer/>
             </Layout>
         </div>

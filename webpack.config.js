@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlWebpackPluginConfigs = require('./htmlWebpackPluginConfig.js')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+//import dark mode
+//const darkThemeVars = require('antd/dist/dark-theme')
 module.exports = (env, args) => {
     const mode = args.mode ? args.mode : 'production'
     const isProduction = mode === 'production'
@@ -51,6 +53,24 @@ module.exports = (env, args) => {
                             }
                         }, 'less-loader'],
                         exclude: /node_modules/
+                    },
+                    //loader for antd styles.
+                    {
+                        test: /\.less/,
+                        use: ['style-loader', {
+                            loader: 'css-loader'
+                        }, {
+                            loader: 'less-loader',
+                            options: {
+                                modifyVars: {
+                                    'primary-color': '#1DA57A',
+                                    //'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
+                                    // ...darkThemeVars
+                                },
+                                javascriptEnabled: true
+                            }
+                        }],
+                        include: path.join(__dirname, '/node_modules/antd')
                     },
                     {
                         test: /\.(jpg|png|gif|webp|svg|eot|ttf|woff|woff2)/,
