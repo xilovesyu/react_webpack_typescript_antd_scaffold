@@ -1,14 +1,10 @@
-/*
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlWebpackPluginConfigs = require('./htmlWebpackPluginConfig.js')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin//analyzer
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')//removed unused moment locales
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-//import dark mode
-//const darkThemeVars = require('antd/dist/dark-theme')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')//removed unused moment locales
+
 module.exports = (env, args) => {
     const mode = args.mode ? args.mode : 'production'
     const isProduction = mode === 'production'
@@ -28,12 +24,12 @@ module.exports = (env, args) => {
                 'react-dom': 'ReactDOM'
             },
             resolve: {
-                extensions: ['.ts', '.tsx', '.web.js', '.js', '.json', '.css', '.png', '.gif', '.svg'],
+                extensions: ['.ts', '.tsx', '.web.js', '.js', '.json', '.css', '.png', '.gif', '.svg']
             },
             module: {
                 rules: [
                     {
-                        test: /\.jsx?$/,
+                        test: /\.js[x]?$/,
                         use: 'babel-loader',
                         exclude: /node_modules/
                     },
@@ -45,7 +41,24 @@ module.exports = (env, args) => {
                     },
                     {
                         test: /\.less/,
-                        use: [ MiniCssExtractPlugin.loader, 'css-loader', {
+                        use: [{
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                hmr: !isProduction,
+                                reloadAll: true,
+                                stats: {
+                                    all: false,
+                                    assets: true,
+                                    cachedAssets: true,
+                                    errors: true,
+                                    errorDetails: true,
+                                    hash: true,
+                                    performance: true,
+                                    publicPath: true,
+                                    timings: true
+                                }
+                            }
+                        }, 'css-loader', {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: function () {
@@ -61,14 +74,18 @@ module.exports = (env, args) => {
                     {
                         test: /\.less/,
                         use: [{
-                            loader:  MiniCssExtractPlugin.loader
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                hmr: !isProduction,
+                                reloadAll: true
+                            }
                         }, {
                             loader: 'css-loader'
                         }, {
                             loader: 'less-loader',
                             options: {
                                 modifyVars: {
-                                    'primary-color': '#1DA57A',
+                                    'primary-color': '#1DA57A'
                                     //'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
                                     // ...darkThemeVars
                                 },
@@ -96,29 +113,18 @@ module.exports = (env, args) => {
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                    template:'./src/index.html',
+                    template: './src/index.html',
                     filename: 'index.html',
                     config: htmlWebpackPluginConfigs[isProduction ? 'production' : 'development']
                 }),
                 new CleanWebpackPlugin(),
-                new webpack.HotModuleReplacementPlugin(), //hot update plugin
-                new BundleAnalyzerPlugin(),
-                new MomentLocalesPlugin({
-                    localesToKeep: ['es-us', 'fr', 'zh-cn'],
-                }),
                 new MiniCssExtractPlugin({
                     filename: 'css/[name].css'
+                }),
+                new MomentLocalesPlugin({
+                    localesToKeep: ['es-us', 'fr', 'zh-cn']
                 })
-            ],
-            devServer: {
-                port: 8001,
-                hot: true,
-                host: '0.0.0.0',
-                stats: 'errors-only', //only prints error in console
-                //overlay: false, //full screen error display? default is false
-                //clientLogLevel: "silent", //silent meaning no 'Waiting for update signal from WDS...' and other.
-                //compress: true //use gzip? default is false.
-            }
+            ]
         }
     )
-}*/
+}

@@ -42,6 +42,9 @@ const formats = {
 @observer
 class App extends React.Component<any, any> {
     render(): any {
+        if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+            //console.log('you are in development mode.')
+        }
         moment.locale(languageStore.momentLanguage)
         return (
             <Provider languageStore={languageStore}>
