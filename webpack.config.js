@@ -3,7 +3,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlWebpackPluginConfigs = require('./htmlWebpackPluginConfig.js')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin//analyzer
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')//removed unused moment locales
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 //import dark mode
 //const darkThemeVars = require('antd/dist/dark-theme')
 module.exports = (env, args) => {
@@ -42,7 +44,7 @@ module.exports = (env, args) => {
                     },
                     {
                         test: /\.less/,
-                        use: ['style-loader', 'css-loader', {
+                        use: [ MiniCssExtractPlugin.loader, 'css-loader', {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: function () {
@@ -57,7 +59,9 @@ module.exports = (env, args) => {
                     //loader for antd styles.
                     {
                         test: /\.less/,
-                        use: ['style-loader', {
+                        use: [{
+                            loader:  MiniCssExtractPlugin.loader
+                        }, {
                             loader: 'css-loader'
                         }, {
                             loader: 'less-loader',
@@ -96,7 +100,14 @@ module.exports = (env, args) => {
                     config: htmlWebpackPluginConfigs[isProduction ? 'production' : 'development']
                 }),
                 new CleanWebpackPlugin(),
-                new webpack.HotModuleReplacementPlugin() //hot update plugin
+                new webpack.HotModuleReplacementPlugin(), //hot update plugin
+                new BundleAnalyzerPlugin(),
+                new MomentLocalesPlugin({
+                    localesToKeep: ['es-us', 'fr', 'zh-cn'],
+                }),
+                new MiniCssExtractPlugin({
+                    filename: 'css/[name].css'
+                })
             ],
             devServer: {
                 port: 8001,
