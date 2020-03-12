@@ -39,14 +39,18 @@ const formats = {
     }
 }
 
-
 @observer
 class App extends React.Component<any, any> {
     render(): any {
         moment.locale(languageStore.momentLanguage)
         return (
             <Provider languageStore={languageStore}>
-                <IntlProvider locale={languageStore.intlLanguage} messages={languageStore.intlMsg} formats={formats}>
+                <IntlProvider
+                    locale={languageStore.intlLanguage}
+                    key={languageStore.intlLanguage}
+                    messages={languageStore.intlMsg}
+                    formats={formats}
+                >
                     <ConfigProvider locale={languageStore.antdLanguage}>
                         <Layout>
                             <Header/>
