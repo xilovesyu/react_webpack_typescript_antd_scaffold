@@ -15,7 +15,10 @@ export class Header extends React.Component<any, any> {
                 }}>中文</Button>
                 <Button onClick={() => {
                     this.props.languageStore.toFr()
-                }}>french</Button>
+                }}>French</Button>
+                <Button onClick={() => {
+                    this.props.languageStore.toEN()
+                }}>English</Button>
             </AntdHeader>
         )
     }

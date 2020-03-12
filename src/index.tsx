@@ -7,28 +7,57 @@ import { Footer } from './components/footer/Footer'
 import { Content } from './components/content/Content'
 import { observer, Provider } from 'mobx-react'
 import { languageStore } from './store/LanguageStore'
+import { IntlProvider } from 'react-intl'
+import moment from 'moment'
+//import intl from 'intl' //Polyfill for ie and safari
+require('intl')
 /**
  * For accept hot update without reload page.
  * */
-if(module && module.hot) {
+if (module && module.hot) {
     module.hot.accept()
 }
+
+/**
+ * Shorter formats for money. Use <FormattedNumber value={1000} format='USD'/> instead of
+ * <FormattedNumber value={1000} style="currency" currency="USD"/>
+ * */
+const formats = {
+    number: {
+        USD: {
+            style: 'currency',
+            currency: 'USD'
+        },
+        CNY: {
+            style: 'currency',
+            currency: 'CNY'
+        },
+        EUR: {
+            style: 'currency',
+            currency: 'EUR'
+        }
+    }
+}
+
 
 @observer
 class App extends React.Component<any, any> {
     render(): any {
+        moment.locale(languageStore.momentLanguage)
         return (
             <Provider languageStore={languageStore}>
-                <ConfigProvider locale={languageStore.language}>
-                    <Layout>
-                        <Header/>
-                        <Content/>
-                        <Footer/>
-                    </Layout>
-                </ConfigProvider>
+                <IntlProvider locale={languageStore.intlLanguage} messages={languageStore.intlMsg} formats={formats}>
+                    <ConfigProvider locale={languageStore.antdLanguage}>
+                        <Layout>
+                            <Header/>
+                            <Content/>
+                            <Footer/>
+                        </Layout>
+                    </ConfigProvider>
+                </IntlProvider>
             </Provider>
         )
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('content'))
+ReactDOM.render(<App/>, document.getElementById('content'))
