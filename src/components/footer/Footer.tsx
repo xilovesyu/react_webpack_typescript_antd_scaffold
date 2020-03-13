@@ -15,4 +15,4 @@ const Footer = React.memo(() => {
 
 Footer.displayName = 'Footer'
 
-export {Footer}
+export { Footer }

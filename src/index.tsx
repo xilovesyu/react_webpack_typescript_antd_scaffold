@@ -1,14 +1,12 @@
 import './index.less'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Header } from './components/header/Header'
-import { ConfigProvider, Layout } from 'antd'
-import { Footer } from './components/footer/Footer'
-import { Content } from './components/content/Content'
+import { ConfigProvider } from 'antd'
 import { observer, Provider } from 'mobx-react'
 import { languageStore } from './store/LanguageStore'
 import { IntlProvider } from 'react-intl'
 import moment from 'moment'
+import { Route } from './route/Route'
 //import intl from 'intl' //Polyfill for ie and safari
 require('intl')
 /**
@@ -55,11 +53,7 @@ class App extends React.Component<any, any> {
                     formats={formats}
                 >
                     <ConfigProvider locale={languageStore.antdLanguage}>
-                        <Layout>
-                            <Header/>
-                            <Content/>
-                            <Footer/>
-                        </Layout>
+                        <Route/>
                     </ConfigProvider>
                 </IntlProvider>
             </Provider>

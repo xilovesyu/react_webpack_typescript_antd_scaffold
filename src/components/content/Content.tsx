@@ -1,14 +1,16 @@
 import * as React from 'react'
-import { Button, Table } from 'antd'
-import { FormattedMessage, FormattedNumber, FormattedPlural } from 'react-intl'
+import { Table } from 'antd'
+import { FormattedMessage, FormattedNumber } from 'react-intl'
 import { t } from '../../util/Intl'
 import moment from 'moment'
+import { Layout } from 'antd'
+
+const {Content: AntdContent} = Layout
+
 export class Content extends React.Component<any, any> {
     render(): any {
         return (
-            <div>
-                something
-                <Button type='primary'>Click me</Button>
+            <AntdContent>
                 <Table
                     dataSource={[]}
                 />
@@ -25,16 +27,16 @@ export class Content extends React.Component<any, any> {
                     <FormattedNumber value={1000} format='USD'/>
                 </p>
                 <p>
-                    <FormattedNumber value={1000} style="currency" currency="USD"/>
+                    <FormattedNumber value={1000} style='currency' currency='USD'/>
                 </p>
                 <p>
-                    <FormattedNumber value={1000} style="currency" currency="GBP"/>
+                    <FormattedNumber value={1000} style='currency' currency='GBP'/>
                 </p>
                 <p>
-                    <FormattedNumber value={1000} style="currency" currency="CNY"/>
+                    <FormattedNumber value={1000} style='currency' currency='CNY'/>
                 </p>
                 <p>
-                    <FormattedNumber value={1000} style="currency" currency="EUR"/>
+                    <FormattedNumber value={1000} style='currency' currency='EUR'/>
                 </p>
                 <p>
                     <FormattedMessage
@@ -51,7 +53,7 @@ export class Content extends React.Component<any, any> {
                         moment().format('LLLL')
                     }
                 </p>
-            </div>
+            </AntdContent>
         )
     }
 }

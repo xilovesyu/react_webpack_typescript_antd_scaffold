@@ -85,7 +85,13 @@ module.exports = (env, args) => {
                             loader: 'less-loader',
                             options: {
                                 modifyVars: {
-                                    'primary-color': '#1DA57A'
+                                    'primary-color': '#1DA57A',
+                                    'link-color': '#ff9af4',
+                                    'success-color': '#52c41a',
+                                    'font-size-base': '16px',
+                                    'border-radius-base': '4px',
+
+                                    //dark mode
                                     //'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
                                     // ...darkThemeVars
                                 },

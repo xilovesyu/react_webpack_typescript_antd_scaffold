@@ -46,10 +46,10 @@ class LanguageStore {
         const intlLanguage = this.intlLanguage
         let intlMsg
         switch (intlLanguage) {
-            case 'zh': intlMsg = zh_CN; break;
-            case 'fr': intlMsg = fr_FR; break;
-            case 'en': intlMsg = en_US; break;
-            default: intlMsg = zh_CN; break;
+            case 'zh': intlMsg = zh_CN; break
+            case 'fr': intlMsg = fr_FR; break
+            case 'en': intlMsg = en_US; break
+            default: intlMsg = zh_CN; break
         }
         this.intlMsg = intlMsg
     }
