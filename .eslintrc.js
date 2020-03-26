@@ -38,7 +38,7 @@ module.exports = {
         'semi': ['error', 'never'],
         'camelcase': [0, {'properties': 'never'}],
         'quotes': ['error', 'single'],
-        'no-var-requires': 2,
+        'no-var-requires': 0,
         'no-unused-vars': 2,
         '@typescript-eslint/camelcase': 0, //for typescript
         '@typescript-eslint/no-var-requires': 0, //for typescript
