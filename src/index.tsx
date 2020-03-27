@@ -7,6 +7,8 @@ import { languageStore } from './store/LanguageStore'
 import { IntlProvider } from 'react-intl'
 import moment from 'moment'
 import { Route } from './route/Route'
+import * as allStores from './store'
+
 //import intl from 'intl' //Polyfill for ie and safari
 require('intl')
 /**
@@ -45,7 +47,7 @@ class App extends React.Component<any, any> {
         }
         moment.locale(languageStore.momentLanguage)
         return (
-            <Provider languageStore={languageStore}>
+            <Provider {...allStores}>
                 <IntlProvider
                     locale={languageStore.intlLanguage}
                     key={languageStore.intlLanguage}

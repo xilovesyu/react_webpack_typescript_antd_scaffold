@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import { FormattedMessage, FormattedNumber } from 'react-intl'
 import { t } from '../../util/Intl'
 import moment from 'moment'
 import { Layout } from 'antd'
+import { MockTable } from './MockTable'
 
 const {Content: AntdContent} = Layout
 
@@ -11,9 +12,9 @@ export class Content extends React.Component<any, any> {
     render(): any {
         return (
             <AntdContent>
-                <Table
-                    dataSource={[]}
-                />
+                <Button type={'primary'}> Primary Button </Button>
+                <Table />
+                <MockTable />
                 <p>
                     <FormattedNumber value={1000.12}/>
                 </p>

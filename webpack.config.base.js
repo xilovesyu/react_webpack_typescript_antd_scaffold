@@ -4,6 +4,25 @@ const htmlWebpackPluginConfigs = require('./htmlWebpackPluginConfig.js')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')//removed unused moment locales
+const AntDesignThemePlugin = require('antd-theme-webpack-plugin')
+const darkVars = require('./antdThemes/colorsVariables')
+//const darkThemeVars = require('antd/dist/dark-theme') //For just replace at start time.
+
+const antdThemeOptions = {
+    antDir: path.join(__dirname, './node_modules/antd'),
+    stylesDir: path.join(__dirname, './src/styles'),
+    varFile: path.join(__dirname, './src/styles/variables.less'),
+    mainLessFile: path.join(__dirname, './src/styles/index.less'),
+    themeVariables: [
+        ...darkVars.vars
+    ],
+    indexFileName: 'index.html',
+    generateOnce: false,
+    lessUrl: 'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js',
+    publicPath: '',
+    customColorRegexArray: [], // An array of regex codes to match your custom primaryColor variable values so that code can identify that it's a valid primaryColor. Make sure your regex does not adds false positives.
+}
+const themePlugin = new AntDesignThemePlugin(antdThemeOptions)
 
 module.exports = (env, args) => {
     const mode = args.mode ? args.mode : 'production'
@@ -85,15 +104,11 @@ module.exports = (env, args) => {
                             loader: 'less-loader',
                             options: {
                                 modifyVars: {
-                                    'primary-color': '#1DA57A',
-                                    'link-color': '#ff9af4',
-                                    'success-color': '#52c41a',
-                                    'font-size-base': '16px',
-                                    'border-radius-base': '4px',
-
-                                    //dark mode
+                                    ////////For custom colors///////
+                                    //'primary-color': '#1DA57A',
+                                    ////////For just use dark modes///////
                                     //'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
-                                    // ...darkThemeVars
+                                    //...darkThemeVars
                                 },
                                 javascriptEnabled: true
                             }
@@ -129,7 +144,8 @@ module.exports = (env, args) => {
                 }),
                 new MomentLocalesPlugin({
                     localesToKeep: ['es-us', 'fr', 'zh-cn']
-                })
+                }),
+                themePlugin
             ]
         }
     )
