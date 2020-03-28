@@ -3,3 +3,5 @@ node_modules/**
 yarn-error.log
 yarn.lock
 
+## mac file
+.DS_Store

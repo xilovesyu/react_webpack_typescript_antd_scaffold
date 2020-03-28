@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Demo</title>
-    <script crossorigin src="<%= (htmlWebpackPlugin.options.config.reactUrl) %>"></script>
-    <script crossorigin src="<%= (htmlWebpackPlugin.options.config.reactDomUrl) %>"></script>
+    <script crossorigin src="<%= (htmlWebpackPlugin.options.config.reactMode.reactUrl) %>"></script>
+    <script crossorigin src="<%= (htmlWebpackPlugin.options.config.reactMode.reactDomUrl) %>"></script>
 </head>
 
 <body>
 <div>
-    <link rel="stylesheet/less" type="text/css" href="/color.less" />
+    <link rel="stylesheet/less" type="text/css" href="<%= (htmlWebpackPlugin.options.config.publicPath) %>/color.less" />
     <script>
         window.less = {
             async: false,
             env: 'production'
         };
     </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
     <div id="content"></div>
 </div>
 </body>

@@ -1,4 +1,6 @@
+// noinspection WebpackConfigHighlighting
 module.exports = {
+    publicPath: '/demo',
     development: {
         title: 'Demo For Development',
         reactUrl: 'https://unpkg.com/react@16/umd/react.development.js',

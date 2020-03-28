@@ -5,6 +5,9 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')//removed unused moment locales
 const AntDesignThemePlugin = require('antd-theme-webpack-plugin')
+
+const publicPath = require('./htmlWebpackPluginConfig').publicPath
+
 const darkVars = require('./antdThemes/colorsVariables')
 //const darkThemeVars = require('antd/dist/dark-theme') //For just replace at start time.
 
@@ -19,7 +22,7 @@ const antdThemeOptions = {
     indexFileName: 'index.html',
     generateOnce: false,
     lessUrl: 'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js',
-    publicPath: '',
+    publicPath: publicPath,
     customColorRegexArray: [], // An array of regex codes to match your custom primaryColor variable values so that code can identify that it's a valid primaryColor. Make sure your regex does not adds false positives.
 }
 const themePlugin = new AntDesignThemePlugin(antdThemeOptions)
@@ -36,7 +39,7 @@ module.exports = (env, args) => {
             output: {
                 path: path.resolve(__dirname, 'build'), //must be absolute path,
                 filename: 'index.bundle.[hash:6].js',
-                publicPath: '/'
+                publicPath: publicPath
             },
             externals: {
                 'react': 'React', //for import react from html with cdn
@@ -136,7 +139,10 @@ module.exports = (env, args) => {
                 new HtmlWebpackPlugin({
                     template: './src/index.html',
                     filename: 'index.html',
-                    config: htmlWebpackPluginConfigs[isProduction ? 'production' : 'development']
+                    config: {
+                        publicPath: htmlWebpackPluginConfigs['publicPath'],
+                        reactMode: htmlWebpackPluginConfigs[isProduction ? 'production' : 'development']
+                    }
                 }),
                 new CleanWebpackPlugin(),
                 new MiniCssExtractPlugin({

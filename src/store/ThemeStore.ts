@@ -17,7 +17,8 @@ class ThemeStore {
                     .modifyVars({
                         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                         // @ts-ignore
-                        'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
+                        //'hack': `true;@import "${require.resolve('antd/lib/style/color/colorPalette.less')}";`,
+                        'hack': 'true',
                         ...variables,
                         '@primary-color': primaryColor
                     })
