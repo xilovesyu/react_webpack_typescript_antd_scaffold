@@ -64,9 +64,9 @@ module.exports = (env, args) => {
                     {
                         test: /\.less/,
                         use: [{
-                            loader: MiniCssExtractPlugin.loader,
-                            options: {
-                                hmr: !isProduction,
+                            loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                            /*options: {
+                                hmr: true,
                                 reloadAll: true,
                                 stats: {
                                     all: false,
@@ -79,7 +79,7 @@ module.exports = (env, args) => {
                                     publicPath: true,
                                     timings: true
                                 }
-                            }
+                            }*/
                         }, 'css-loader', {
                             loader: 'postcss-loader',
                             options: {
@@ -146,7 +146,7 @@ module.exports = (env, args) => {
                 }),
                 new CleanWebpackPlugin(),
                 new MiniCssExtractPlugin({
-                    filename: 'css/[name].css'
+                    filename: 'css/[name].[hash:6].css'
                 }),
                 new MomentLocalesPlugin({
                     localesToKeep: ['es-us', 'fr', 'zh-cn']

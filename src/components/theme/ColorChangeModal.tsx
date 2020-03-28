@@ -1,3 +1,4 @@
+import './ColorSelection.less'
 import * as React from 'react'
 import { Button, Modal } from 'antd'
 import { observer } from 'mobx-react'
@@ -10,6 +11,7 @@ export class ColorChangeModal extends React.Component<any, any> {
     render(): any {
         return (
             <Modal
+                className={'color-modal'}
                 visible={headerStore.colorPanelOpen}
                 title={'select your primary key.'}
                 zIndex={10}

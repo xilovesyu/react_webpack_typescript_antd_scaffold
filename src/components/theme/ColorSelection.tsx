@@ -1,6 +1,7 @@
+import './ColorSelection.less'
 import * as React from 'react'
-import { Button, Modal } from 'antd'
-import { headerStore, themeStore } from '../../store'
+import { Button } from 'antd'
+import { themeStore } from '../../store'
 import { ChromePicker } from 'react-color'
 
 export class ColorSelection extends React.Component<any, any> {
@@ -22,14 +23,14 @@ export class ColorSelection extends React.Component<any, any> {
 
     render(): any {
         return (
-            <div>
+            <div className='color-selection'>
                 <Button
                     onClick={() => {
                         this.setState({
                             pickerVisible: true
                         })
                     }}
-                    style={{background: this.state.color}}
+                    style={{background: this.state.color, visibility: 'visible'}}
                 />
                 <span>{this.props.title}</span>
                 {
