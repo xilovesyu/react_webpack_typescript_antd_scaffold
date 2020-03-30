@@ -1,13 +1,6 @@
+import './Login.less'
 import * as React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
-
-const layout = {
-    labelCol: {span: 8},
-    wrapperCol: {span: 16}
-}
-const tailLayout = {
-    wrapperCol: {offset: 8, span: 16}
-}
 
 export class Login extends React.Component<any, any> {
     onFinish = (values: any) => {
@@ -21,8 +14,8 @@ export class Login extends React.Component<any, any> {
 
     render(): any {
         return (
+            <div className='login-form-outer'>
             <Form
-                {...layout}
                 name='basic'
                 initialValues={{remember: true}}
                 onFinish={this.onFinish}
@@ -44,16 +37,22 @@ export class Login extends React.Component<any, any> {
                     <Input.Password/>
                 </Form.Item>
 
-                <Form.Item {...tailLayout} name='remember' valuePropName='checked'>
+                <Form.Item
+                    name='remember'
+                    valuePropName='checked'
+                >
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
-                <Form.Item {...tailLayout}>
+                <Form.Item
+                    className='login-button'
+                >
                     <Button type='primary' htmlType='submit'>
                         Submit
                     </Button>
                 </Form.Item>
             </Form>
+            </div>
         )
     }
 }
