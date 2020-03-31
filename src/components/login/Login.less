@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
 }
-.login-form-outer form {
-  width: 600px;
-}
-.login-form-outer .ant-form-item-control{
-  width: 100%;
-}
-.login-form-outer .login-button .ant-form-item-control{
-  align-items: center;
+.login-form-outer form {width: 600px;}
+.login-form-outer .ant-form-item-control{width: 100%;}
+.login-form-outer .form-item-login .ant-form-item-control{align-items: center;}
+.login-form-outer .form-item-login .ant-form-item-control-input{width: 100%;}
+
+@media(max-width: 414px) {
+  .login-form-outer form {max-width: 400px;}
+  .login-form-outer form {padding: 20px;}
 }
